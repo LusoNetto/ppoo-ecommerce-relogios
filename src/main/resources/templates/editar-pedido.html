@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Pedido</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script th:inline="javascript">
+	    /*<![CDATA[*/
+	    function updatePedido() {
+	        var email = document.getElementById('email').value;
+	        var endereco = document.getElementById('endereco').value;
+	        var cidade = document.getElementById('cidade').value;
+	        var estado = document.getElementById('estado').value;
+	        var cep = document.getElementById('cep').value;
+	        var status = document.getElementById('status').value;
+	
+	        var pedido = {
+	            email: email,
+	            endereco: endereco,
+	            cidade: cidade,
+	            estado: estado,
+	            cep: cep,
+	            status: status
+	        };
+	
+	        fetch('/pedidos/1', {
+	            method: 'PUT',
+	            headers: {
+	                'Content-Type': 'application/json'
+	            },
+	            body: JSON.stringify(pedido)
+	        })
+	        .then(response => {
+	            if (response.ok) {
+	                alert('Pedido atualizado com sucesso!');
+	                location.reload();
+	            } else {
+	                alert('Erro ao atualizar pedido.');
+	            }
+	        });
+	    }
+	    /*]]>*/
+	</script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Editar Pedido</h1>
+        <form th:action="@{/pedidos}" method="post" onsubmit="updatePedido(); return false;">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" id="email" name="email" th:value="${pedido.email}">
+            </div>
+            <div class="form-group">
+                <label for="endereco">Endereço</label>
+                <input type="text" class="form-control" id="endereco" name="endereco" th:value="${pedido.endereco}">
+            </div>
+            <div class="form-group">
+                <label for="cidade">Cidade</label>
+                <input type="text" class="form-control" id="cidade" name="cidade" th:value="${pedido.cidade}">
+            </div>
+            <div class="form-group">
+                <label for="estado">Estado</label>
+                <input type="text" class="form-control" id="estado" name="estado" th:value="${pedido.estado}">
+            </div>
+            <div class="form-group">
+                <label for="cep">CEP</label>
+                <input type="text" class="form-control" id="cep" name="cep" th:value="${pedido.cep}">
+            </div>
+            <div class="form-group">
+                <label for="status">Status</label>
+                <input type="text" class="form-control" id="status" name="status" th:value="${pedido.status}">
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

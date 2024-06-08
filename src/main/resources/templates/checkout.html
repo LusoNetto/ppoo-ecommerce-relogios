@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedidos</title>
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <script>
+		function enviarFormulario() {
+		    const form = document.getElementById('pedidoForm');
+		    const formData = new FormData(form);
+		    const data = {};
+		    formData.forEach((value, key) => {
+		        data[key] = value;
+		    });
+		
+		    fetch('http://localhost:8080/pedidos', {
+		        method: 'POST',
+		        headers: {
+		            'Content-Type': 'application/json'
+		        },
+		        body: JSON.stringify(data)
+		    })
+		    .then(response => response.json())
+		    .then(data => console.log(data))
+		    .catch(error => console.error('Error:', error));
+		}
+	</script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="/ecommerce">Luso Relógios</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/ecommerce">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pedido">Pedidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/carrinho">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                <path d="M0 1a1 1 0 0 1 1-1h1.11l.4 2H14a1 1 0 0 1 .98 1.196l-1.39 7A1 1 0 0 1 12.61 11H5.68l-.1.563a1 1 0 0 1-.977.837H1a1 1 0 0 1 0-2h2.442l.884-4.92L1.11 3H1a1 1 0 0 1-1-1zm3 4 1-5h9.11L13 7H4l-1-2zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+                            </svg>
+                            <span th:text="${quantidadeCarrinho}"id="cart-count" class="badge badge-light"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container mt-5">
+        <h1>Checkout</h1>
+        <form id="pedidoForm">
+            <div class="form-group">
+                <label for="name">Nome Completo</label>
+                <input type="text" class="form-control" id="name" name="nome" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Endereço</label>
+                <input type="text" class="form-control" id="address" name="endereco" required>
+            </div>
+            <div class="form-group">
+                <label for="city">Cidade</label>
+                <input type="text" class="form-control" id="city" name="cidade" required>
+            </div>
+            <div class="form-group">
+                <label for="state">Estado</label>
+                <input type="text" class="form-control" id="state" name="estado" required>
+            </div>
+            <div class="form-group">
+                <label for="zip">CEP</label>
+                <input type="text" class="form-control" id="zip" name="cep" required>
+            </div>
+            <div class="form-group">
+                <label for="payment-method">Método de Pagamento</label>
+                <select class="form-control" id="payment-method" name="paymentMethod" required>
+                    <option value="credit-card">Cartão de Crédito</option>
+                    <option value="debit-card">Cartão de Débito</option>
+                    <option value="paypal">PayPal</option>
+                </select>
+            </div>
+            <div class="form-group" id="card-details" style="display: none;">
+                <label for="card-number">Número do Cartão</label>
+                <input type="text" class="form-control" id="card-number" name="cardNumber">
+                <label for="card-expiry">Validade (MM/AA)</label>
+                <input type="text" class="form-control" id="card-expiry" name="cardExpiry">
+                <label for="card-cvc">CVC</label>
+                <input type="text" class="form-control" id="card-cvc" name="cardCvc">
+            </div>
+            <input hidden value="preparando pedido" type="text" class="form-control" id="status" name="status" required>
+            <a href="/pedido"><button type="button" onclick="enviarFormulario()">Finalizar pedido</button></a>
+		</form>
+    </div>
+
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container text-center">
+            <span class="text-muted">© 2024 Luso Relógios. Todos os direitos reservados.</span>
+        </div>
+    </footer>
+    
+    <script th:src="@{https://code.jquery.com/jquery-3.5.1.slim.min.js}"></script>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js}"></script>
+    <script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedidos</title>
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="/ecommerce">Luso Relógios</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/ecommerce">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pedido">Pedidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/carrinho">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                <path d="M0 1a1 1 0 0 1 1-1h1.11l.4 2H14a1 1 0 0 1 .98 1.196l-1.39 7A1 1 0 0 1 12.61 11H5.68l-.1.563a1 1 0 0 1-.977.837H1a1 1 0 0 1 0-2h2.442l.884-4.92L1.11 3H1a1 1 0 0 1-1-1zm3 4 1-5h9.11L13 7H4l-1-2zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+                            </svg>
+                            <span th:text="${quantidadeCarrinho}"id="cart-count" class="badge badge-light"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container mt-5">
+        <h1>Pedidos</h1>
+        <div>
+            <div th:each="pedido : ${pedidos}">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        Pedido ID: <span th:text="${pedido.id}"></span> - Status: <span th:text="${pedido.status}"></span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Detalhes do Pedido</h5>
+                        <p><strong>Email:</strong> <span th:text="${pedido.email}"></span></p>
+                        <p><strong>Endereço de entrega:</strong> <span th:text="${pedido.endereco}"></span>, <span th:text="${pedido.cidade}"></span>, <span th:text="${pedido.estado}"></span>, <span th:text="${pedido.cep}"></span></p>
+                        <h6>Itens do Pedido</h6>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Quantidade</th>
+                                    <th>Preço Unitário</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="item : ${itensCarrinho}">
+                                    <td th:text="${item.produto.nome}"></td>
+                                    <td th:text="${item.quantidade}"></td>
+                                    <td th:text="'R$ ' + ${item.produto.preco}"></td>
+                                    <td th:text="'R$ ' + ${item.produto.preco * item.quantidade}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container text-center">
+            <span class="text-muted">© 2024 Luso Relógios. Todos os direitos reservados.</span>
+        </div>
+    </footer>
+
+    <script th:src="@{https://code.jquery.com/jquery-3.5.1.slim.min.js}"></script>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js}"></script>
+    <script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
+</body>
+</html>

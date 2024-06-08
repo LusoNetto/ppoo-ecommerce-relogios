@@ -1,0 +1,17 @@
+show databases;
+create table alunos;
+select * from produtos;
+insert into carrinhos (id) values(1);
+insert into clientes (carrinho_id, id, nome, login, senha, email, whatsapp) values(1, 1, 'Luciano', 'luciano123', '123456', 'lusonetto137@outlook.com', '11955961452');
+insert into produtos (nome, preco, url_img) values ('Rolex Oyster Perpetual', 100000, 'https://m.media-amazon.com/images/I/61el+rhavSL._AC_SL1120_.jpg');
+insert into produtos (nome, preco, url_img) values ('Rolex Deepsea', 106800, 'https://media.rolex.com/image/upload/q_auto:best/f_auto/t_v7-main-configurator/c_limit,w_640/v1/catalogue/2024/upright-c/m136660-0006');
+insert into produtos (nome, preco, url_img) values ('Rolex Oyster Perpetual Date', 14999, 'https://img.chrono24.com/images/uhren/33305862-4kofje1a7dif1mvxd8uchq20-Square360.jpg');
+insert into produtos (nome, preco, url_img) values ('Rolex Datejust 36', 43000, 'https://img.chrono24.com/images/uhren/32114267-twj5i2s84kwjteddeujuo0ei-Square360.jpg');
+insert into produtos (nome, preco, url_img) values ('Rolex GMT-Master II', 110000, 'https://img.chrono24.com/images/uhren/26739616-ycu183l54x9nc7oasq2f02mb-Square360.jpg');
+insert into produtos (nome, preco, url_img) values ('Rolex GMT-Master II', 98000, 'https://img.chrono24.com/images/uhren/31541641-523zdfa42t42mapy1h20rggw-Square360.jpg');
+insert into produtos (nome, preco, url_img) values ('Rolex Datejust 36', 19000, 'https://img.chrono24.com/images/uhren/26684572-8dphij8b25sxjrvacdnlfbc6-Square360.jpg');
+insert into produtos (nome, preco, url_img) values ('Rolex Datejust', 48500, 'https://img.chrono24.com/images/uhren/31409653-mtviyo5amnyqvw5qyrpjw0za-Square360.jpg');
+insert into produtos (nome, preco, url_img) values ('Rolex Submariner Date', 100000, 'https://img.chrono24.com/images/uhren/26739771-2cz6u2203fpsijucsol7fi5p-Square360.jpg');
+insert into produtos (nome, preco, url_img) values ('Rolex Datejust 36', 26999, 'https://img.chrono24.com/images/uhren/33304830-h2dfigyho1vqykqmvrkysbi0-Square360.jpg');
+insert into produtos (nome, preco, url_img) values ('Rolex Datejust 31', 19000, 'https://img.chrono24.com/images/uhren/34167703-j48lhkalumn5pgydlpkifkvy-Square360.jpg');
+insert into produtos (nome, preco, url_img) values ('Rolex GMT-Master II', 120000, 'https://img.chrono24.com/images/uhren/31097259-bpsbl5vik911hs7852jd9qui-Square360.jpg');
